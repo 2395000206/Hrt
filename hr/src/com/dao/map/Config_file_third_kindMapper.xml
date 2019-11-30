@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.Config_file_third_kindMapper">
+  <resultMap id="rmConfig_file_third_kind" type="Config_file_third_kind">
+    <id column="FTK_ID" jdbcType="DECIMAL" property="ftkId" />
+    <result column="FIRST_KIND_ID" jdbcType="VARCHAR" property="firstKindId" />
+    <result column="FIRST_KIND_NAME" jdbcType="VARCHAR" property="firstKindName" />
+    <result column="SECOND_KIND_ID" jdbcType="VARCHAR" property="secondKindId" />
+    <result column="SECOND_KIND_NAME" jdbcType="VARCHAR" property="secondKindName" />
+    <result column="THIRD_KIND_ID" jdbcType="VARCHAR" property="thirdKindId" />
+    <result column="THIRD_KIND_NAME" jdbcType="VARCHAR" property="thirdKindName" />
+    <result column="THIRD_KIND_SALE_ID" jdbcType="VARCHAR" property="thirdKindSaleId" />
+    <result column="THIRD_KIND_IS_RETAIL" jdbcType="CHAR" property="thirdKindIsRetail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    FTK_ID, FIRST_KIND_ID, FIRST_KIND_NAME, SECOND_KIND_ID, SECOND_KIND_NAME, THIRD_KIND_ID, 
+    THIRD_KIND_NAME, THIRD_KIND_SALE_ID, THIRD_KIND_IS_RETAIL
+  </sql>
+  <!-- 查询所有 -->
+  <select id="selectAll" resultMap="rmConfig_file_third_kind">
+      select * from config_file_third_kind
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="rmConfig_file_third_kind">
+    select 
+    <include refid="Base_Column_List" />
+    from CONFIG_FILE_THIRD_KIND
+    where FTK_ID = #{ftkId,jdbcType=DECIMAL}
+  </select>
+ 
+  <delete id="deleteByThird" parameterType="java.math.BigDecimal">
+    delete from CONFIG_FILE_THIRD_KIND
+    where FTK_ID = #{ftkId,jdbcType=DECIMAL}
+  </delete>
+   
+  <insert id="insert" parameterType="Config_file_third_kind">
+    insert into CONFIG_FILE_THIRD_KIND (FTK_ID, FIRST_KIND_ID, FIRST_KIND_NAME, 
+      SECOND_KIND_ID, SECOND_KIND_NAME, THIRD_KIND_ID, 
+      THIRD_KIND_NAME, THIRD_KIND_SALE_ID, THIRD_KIND_IS_RETAIL
+      )
+    values (config_file_third_kindseq.nextval, #{firstKindId,jdbcType=VARCHAR}, #{firstKindName,jdbcType=VARCHAR}, 
+      #{secondKindId,jdbcType=VARCHAR}, #{secondKindName,jdbcType=VARCHAR}, config_file_third_kindseq.nextval, 
+      #{thirdKindName,jdbcType=VARCHAR}, #{thirdKindSaleId,jdbcType=VARCHAR}, #{thirdKindIsRetail,jdbcType=CHAR}
+      )
+  </insert>
+ <!--  <insert id="insertSelective" parameterType="com.xm.bean.Config_file_third_kind">
+    insert into CONFIG_FILE_THIRD_KIND
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ftkId != null">
+        FTK_ID,
+      </if>
+      <if test="firstKindId != null">
+        FIRST_KIND_ID,
+      </if>
+      <if test="firstKindName != null">
+        FIRST_KIND_NAME,
+      </if>
+      <if test="secondKindId != null">
+        SECOND_KIND_ID,
+      </if>
+      <if test="secondKindName != null">
+        SECOND_KIND_NAME,
+      </if>
+      <if test="thirdKindId != null">
+        THIRD_KIND_ID,
+      </if>
+      <if test="thirdKindName != null">
+        THIRD_KIND_NAME,
+      </if>
+      <if test="thirdKindSaleId != null">
+        THIRD_KIND_SALE_ID,
+      </if>
+      <if test="thirdKindIsRetail != null">
+        THIRD_KIND_IS_RETAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ftkId != null">
+        #{ftkId,jdbcType=DECIMAL},
+      </if>
+      <if test="firstKindId != null">
+        #{firstKindId,jdbcType=VARCHAR},
+      </if>
+      <if test="firstKindName != null">
+        #{firstKindName,jdbcType=VARCHAR},
+      </if>
+      <if test="secondKindId != null">
+        #{secondKindId,jdbcType=VARCHAR},
+      </if>
+      <if test="secondKindName != null">
+        #{secondKindName,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdKindId != null">
+        #{thirdKindId,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdKindName != null">
+        #{thirdKindName,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdKindSaleId != null">
+        #{thirdKindSaleId,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdKindIsRetail != null">
+        #{thirdKindIsRetail,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>-->
+  <update id="updateByThird" parameterType="Config_file_third_kind">
+    update CONFIG_FILE_THIRD_KIND
+    set THIRD_KIND_SALE_ID = #{thirdKindSaleId,jdbcType=VARCHAR},
+      THIRD_KIND_IS_RETAIL = #{thirdKindIsRetail,jdbcType=CHAR}
+    where FTK_ID = #{ftkId,jdbcType=DECIMAL}
+  </update>
+</mapper>
